@@ -1,0 +1,11 @@
+
+`CRLF' :any{ 13 10 }
+
+`Method' :any{ `OPTIONS' `GET' `HEAD' `POST' `PUT' `DELETE' `TRACE' `CONNECT' }
+
+`HTTP-Version' “HTTP/1.1” is
+
+`SP' “ ” is
+
+`HTTPREQUEST' :all{ Method SP anything SP HTTP-Version CRLF }
+

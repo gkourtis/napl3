@@ -1,0 +1,14 @@
+classClassInfo _[ 
+	executeFunction
+	sizeofHeader
+	sizeofElement
+	sizeofDataP
+	offset0
+] drop
+
+
+
+
+
+
+

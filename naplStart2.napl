@@ -1,0 +1,73 @@
+numOfTimes1 1000 <-
+numOfTimes2 1000 <-
+
+instructionsPerCycle 10 <-
+processorSpeed 2,2e9 <-
+
+
+`bench' :{ 
+	msecs 
+		numOfTimes1 { 94576389 numOfTimes2 4 pick times drop } times 
+	msecs swap int- swap drop int2double
+	1000,  double/ processorSpeed double* 
+	instructionsPerCycle numOfTimes1 int* numOfTimes2 int* int2double double/
+} 
+
+`bb' :{
+	23434 4959405
+	`bb started' print newline
+	{ dup int+ dup int+ dup int+ dup int+ dup int+ } bench print newline
+	{ dup int* dup int* dup int* dup int* dup int* } bench print newline
+	{ dup int/ dup int/ dup int/ dup int/ dup int/ } bench print newline
+
+	{ dup int+ dup int+ dup int+ dup int+ dup int+ } bench print newline
+	{ dup int* dup int* dup int* dup int* dup int* } bench print newline
+	{ dup int/ dup int/ dup int/ dup int/ dup int/ } bench print newline
+	`bb ended' print newline
+	drop drop
+}
+
+`any' :{ classPatternAny setClass } 
+`all' :{ classPatternAll setClass } 
+
+`:all{' { { 1 setLevel all is } 2 ~~ .{ } 2 setLevel is
+`:any{' { { 1 setLevel any is } 2 ~~ .{ } 2 setLevel is
+
+
+
+`vowel' “eyuioaEYUIOA” is
+`consonant' “qwrtpsdfghjklzxcvbnmQWRTPSDFGHJKLZXCVBNM” is
+
+`vc' { vowel consonant } all is
+
+`digit'						`0123456789' any is
+`exp'							`eE' any is
+`sign'						`+-' any is
+`uinteger' 			:{ digit match1+ } 
+`integer'				:{ sign match01 uinteger } 
+`decimal'				:{ integer { \. match uinteger } match01 } 
+`floatingpoint'	:{ 	decimal { exp match integer } match01 }
+
+`-98765.4545E+4098080' [ 0 ] floatingpoint matchEnd
+
+`+09809.-4098+09' [ 0 ] floatingpoint matchEnd
+
+`-34089.007' [ 0 ] decimal matchEnd
+
+dropall
+
+`over2'		:{ over over }
+`rot'			:{ 3 roll> }
+
+`test1'		:{ 14 15 over2 int+ 3 rot int+ int- }
+
+«{ test1 test1 } debug»
+
+`bello' «maria» “teresa”  ¦qwerty|
+
+[ [ [ ] x y z ] setExcludeFirst 11 12 13 ] asPrototype
+
+[ [ [ ] A B ] setExcludeFirst 100 200 ] asPrototype
+
+
+
